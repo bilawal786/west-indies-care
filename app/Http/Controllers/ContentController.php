@@ -91,6 +91,8 @@ class ContentController extends Controller
    public function missionStore(Request $request){
        $gs = Website::find(1);
        $gs->mission = $request->mission;
+       $gs->mtitle1 = $request->mtitle1;
+       $gs->mtitle2 = $request->mtitle2;
 
        if ($request->hasfile('mimage1')) {
            $image1 = $request->file('mimage1');

@@ -18,7 +18,6 @@ class ContentSeeder extends Seeder
             'lname' => 'Admin',
             'email' => 'admin@gmail.com',
             'role' => '0',
-            'website_id' => 1,
             'phone' => '00000000',
             'address' => 'Guadeloupe',
             'password' => Hash::make('12345678'),
@@ -43,6 +42,8 @@ class ContentSeeder extends Seeder
             'mission' => ' Des nutriments appropriés, une alimentation équilibrée et des options ajoutées à votre style de vie, vous permettront d\'optimiser cet ensemble afin de repartir sur de nouvelles bases.',
             'mimage1' => 'front/images/bg/2.jpg',
             'mimage2' => 'front/images/bg/3.jpg',
+            'mtitle1' => 'West Indies Care',
+            'mtitle2' => 'Specialement Pourlestherapeutes',
 
             'video' => 'https://player.vimeo.com/video/23534361',
             'vimage' => 'front/images/home_02/s2.jpg',

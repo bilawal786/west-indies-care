@@ -11,6 +11,18 @@
                     <form action="{{route('mission.store')}}" method="post" accept-charset="UTF-8" enctype="multipart/form-data" class="row g-3">
                         @csrf
                         <div class="row">
+                            <div class="col-md-6">
+                                <label for="email_address">Titre 1</label>
+                                <div class="form-group">
+                                    <input type="text" name="mtitle1" class="form-control" id="" value="{{$gs->mtitle1}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email_address">Titre 2</label>
+                                <div class="form-group">
+                                    <input type="text" name="mtitle2" class="form-control" id="" value="{{$gs->mtitle2}}">
+                                </div>
+                            </div>
                             <div class="col-md-12">
                                 <label for="email_address">Mission</label>
                                 <div class="form-group">

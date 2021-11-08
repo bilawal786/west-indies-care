@@ -8,11 +8,14 @@
     <title>Tableau de bord</title>
     <link rel="icon" href="{{asset('admin/favicon.ico')}}" type="image/x-icon"> <!-- Favicon-->
     <link rel="stylesheet" href="{{asset('admin/assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/plugins/jquery-datatable/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/plugins/morrisjs/morris.css')}}" />
     <link rel="stylesheet" href="{{asset('admin/assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.css')}}"/>
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/main.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/css/color_skins.css')}}">
+    <!-- Bootstrap Select Css -->
+    <link href="{{asset('admin/assets/plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
@@ -274,6 +277,19 @@
                 </li>
                 <li class="header">MAIN</li>
                 <li class="{{ $link == route('home') ? 'active open':'' }}"> <a href="{{route('home')}}"><i class="zmdi zmdi-home"></i><span>Tableau de bord</span></a></li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Catégories</span> <span class="badge badge-success float-right"></span></a>
+                    <ul class="ml-menu">
+                        <li><a href="{{route('category.index')}}">Catégories principales</a></li>
+                        {{--<li><a href="{{route('subcategory.index')}}">Sous-catégories</a></li>--}}
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Produits</span> <span class="badge badge-success float-right"></span></a>
+                    <ul class="ml-menu">
+                        <li><a href="{{route('product.index')}}">Tous les produits</a></li>
+                    </ul>
+                </li>
                 @if($link == route('general.settings') || $link == route('general.slider') || $link == route('general.mission') || $link == route('general.video')|| $link == route('general.about'))
                 <li class="active open">
                     @else
@@ -315,6 +331,8 @@
 
     </div>
 </section>
+@yield('modal')
+
 <!-- Jquery Core Js -->
 <script src="{{asset('admin/assets/bundles/libscripts.bundle.js')}}"></script> <!-- Lib Scripts Plugin Js ( jquery.v3.2.1, Bootstrap4 js) -->
 <script src="{{asset('admin/assets/bundles/vendorscripts.bundle.js')}}"></script> <!-- slimscroll, waves Scripts Plugin Js -->
@@ -329,6 +347,16 @@
 <script src="{{asset('admin/assets/js/pages/index.js')}}"></script>
 <script src="{{asset('admin/assets/plugins/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('admin/assets/js/pages/forms/editors.js')}}"></script>
+
+<!-- Jquery DataTable Plugin Js -->
+<script src="{{asset('admin/assets/bundles/datatablescripts.bundle.js')}}"></script>
+<script src="{{asset('admin/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('admin/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('admin/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js')}}"></script>
+<script src="{{asset('admin/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js')}}"></script>
+<script src="{{asset('admin/assets/plugins/jquery-datatable/buttons/buttons.print.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/pages/tables/jquery-datatable.js')}}"></script>
+<script src="{{asset('admin/assets/js/pages/forms/basic-form-elements.js')}}"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
@@ -349,6 +377,49 @@
             break;
     }
     @endif
+</script>
+<script>
+    $(document).on("click", "#delete", function(e){
+        e.preventDefault();
+        var link = $(this).attr("href");
+        swal({
+            title: "Voulez-vous supprimer?",
+            text: "Une fois supprimé, ce sera définitivement supprimé!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = link;
+                } else {
+                    swal("Données sécurisées!");
+                }
+            });
+    });
+
+</script>
+<script>
+    function categorychange(elem){
+        $('.subcategory').append('<option value="">Sélectionnez une sous-catégorie</option>');
+        event.preventDefault();
+        let id = elem.value;
+        let _token   = $('meta[name="csrf-token"]').attr('content');
+
+        $.ajax({
+            url: "{{route('fetchsubcategory')}}",
+            type:"POST",
+            data:{
+                id:id,
+                _token: _token
+            },
+            success:function(response){
+                $.each(response, function(i, item) {
+                    $('.subcategory').append('<option value="'+item.id+'">'+item.name+'</option>');
+                });
+            },
+        });
+    }
 </script>
 </body>
 </html>

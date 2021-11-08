@@ -35,9 +35,11 @@ class CreateWebsitesTable extends Migration
             $table->string('simage2')->nullable();
             $table->string('simage3')->nullable();
 
-            $table->string('mission')->nullable();
+            $table->longText('mission')->nullable();
             $table->string('mimage1')->nullable();
             $table->string('mimage2')->nullable();
+            $table->string('mtitle1')->nullable();
+            $table->string('mtitle2')->nullable();
 
             $table->string('video')->nullable();
             $table->string('vimage')->nullable();

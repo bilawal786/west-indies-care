@@ -21,14 +21,14 @@
 <!-- End:: Slider Section -->
 
 <!-- Begin:: Welcome Section -->
-<section class="commonSection welcomeSection">
+<section class="commonSection welcomeSection" id="mission">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
                 <div class="sectionTitle text-center">
                     <img src="{{asset('front/images/icons/1.png')}}" alt=""/>
                     <h5 class="primaryFont">Notre mission</h5>
-                    <h2>West Indies Care <span class="colorPrimary fontWeight400">Specialement Pourlestherapeutes</span></h2>
+                    <h2>{{$content->mtitle1}} <span class="colorPrimary fontWeight400">{{$content->mtitle2}}</span></h2>
                     <p>
                       {{$content->mission}}
                     </p>
@@ -52,7 +52,7 @@
 <!-- End:: Welcome Section -->
 
 <!-- Begin:: Service Section -->
-<div class="commonSection serviceSection hasBeforeDecoration hasAfterDecoration">
+<div class="commonSection serviceSection hasBeforeDecoration hasAfterDecoration" id="offers">
     <div class="layer_img l_01 move_anim">
         <img src="{{asset('front/images/bg/12.png')}}" alt=""/>
     </div>
@@ -168,9 +168,9 @@
     </div>
 </div>
 <!-- End:: Service Section -->
-
-<!-- Begin:: About Section -->
-<section class="commonSection aboutSection">
+@guest
+<!-- Begin:: Espace Section -->
+<section class="commonSection aboutSection" id="espace">
     <div class="layer_img move_anim">
         <img src="{{asset('front/images/bg/7.png')}}" alt=""/>
     </div>
@@ -206,7 +206,50 @@
         </div>
     </div>
 </section>
-<!-- End:: About Section -->
+<!-- End:: Espace Section -->
+@endguest
+
+@auth
+<!-- Begin:: Products Section -->
+<section class="shopPage">
+    <div class="container">
+        <div class="row">
+            @foreach($products as $pro)
+            <div class="col-lg-3 col-md-6">
+                <div class="product_item text-center">
+                    <div class="pi_thumb">
+                        <img src="{{asset($pro->photo)}}" alt=""/>
+                        <div class="pi_01_actions">
+                            <a href=""><i class="icofont-cart-alt"></i></a>
+                            <a href="{{route('front.product', ['id' => $pro->id])}}"><i class="icofont-eye"></i></a>
+                        </div>
+                    </div>
+                    <div class="pi_content">
+                        <p><a href="">{{$pro->category->name}}</a></p>
+                        <h3><a href="{{route('front.product', ['id' => $pro->id])}}">{{$pro->title}}</a></h3>
+                        <div class="product_price clearfix">
+                            <span class="price"><span class="woocommerce-Price-amount amount"><bdi>{{$pro->price}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        {{--<div class="row">
+            <div class="col-lg-12">
+                <div class="make_pagination text-center">
+                    <span class="current">1</span>
+                    <a href="shop.html">2</a>
+                    <a href="shop.html">3</a>
+                    <a class="next" href="shop.html"><i class="icofont-simple-right"></i></a>
+                </div>
+            </div>
+        </div>--}}
+    </div>
+</section>
+<!-- End:: Products Section -->
+@endauth
+
 <!-- Begin:: Appointment Section -->
 <section class="commonSection">
     <div class="container">
@@ -225,7 +268,7 @@
 <!-- End:: Appointment Section -->
 
 <!-- Begin:: About Section -->
-<section class="commonSection aboutSection">
+<section class="commonSection aboutSection" id="about">
     <div class="layer_img move_anim">
         <img src="{{asset('front/images/bg/7.png')}}" alt=""/>
     </div>
@@ -256,7 +299,7 @@
 </section>
 <!-- End:: About Section -->
 <!-- Begin:: Blog Section -->
-<section class="commonSection blogSection">
+<section class="commonSection blogSection" id="blog">
     <div class="layer_img l_04 move_anim">
         <img src="{{asset('front/images/bg/16.png')}}" alt=""/>
     </div>

@@ -80,12 +80,12 @@ $gs = \App\Website::find(1);
                 <nav class="mainMenu">
                     <ul>
                         <li><a href="{{route('front.index')}}">Accueil</a></li>
-                        <li><a href="#">Notre Mission</a></li>
-                        <li><a href="#">Nos Offres</a></li>
-                        <li><a href="#">À propos</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contacts</a></li>
-                        <li><a href="#">Espace Praticien</a></li>
+                        <li><a href="{{route('front.index')}}#mission">Notre Mission</a></li>
+                        <li><a href="{{route('front.index')}}#offers">Nos Offres</a></li>
+                        <li><a href="{{route('front.index')}}#about">À propos</a></li>
+                        <li><a href="{{route('front.index')}}#blog">Blog</a></li>
+                        <li><a href="{{route('front.contact')}}">Contacts</a></li>
+                        <li><a href="{{route('front.index')}}#espace">Espace Praticien</a></li>
                     </ul>
                 </nav>
             </div>
