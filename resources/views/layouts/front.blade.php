@@ -54,15 +54,7 @@ $gs = \App\Website::find(1);
     </style>
 </head>
 <body>
-<!-- Preloading -->
-<div class="preloader text-center">
-    <div class="la-ball-scale-multiple la-2x">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-</div>
-<!-- Preloading -->
+
 
 <!-- Begin:: Header Section -->
 <header class="header_01 isSticky">

@@ -31,14 +31,18 @@
                               {{$product->description}}
                             </p>
                         </div>
+                        <form method="POST" action="{{route('addtocart')}}">
+                            @csrf
                         <div class="cart_quantity clearfix">
                             <div class="quantity quantityd clearfix">
                                 <button type="button" class="minus qtyBtn btnMinus">-</button>
                                 <input type="number" class="carqty input-text qty text" name="quantity" value="1">
                                 <button type="button" class="plus qtyBtn btnPlus">+</button>
                             </div>
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
                             <button type="submit" class="mo_btn"><i class="icofont-cart-alt"></i>Ajouter au panier</button>
                         </div>
+                        </form>
                         <div class="pro_meta clearfix">
                             <h5>Info</h5>
                             <div class="mtItem">

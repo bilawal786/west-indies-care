@@ -90,10 +90,6 @@
                 </div>
             </a>
         </li>
-        <li><a href="#" title="Events"><i class="zmdi zmdi-calendar"></i></a></li>
-        <li><a href="#" title="Inbox"><i class="zmdi zmdi-email"></i></a></li>
-        <li><a href="#" title="Contact List"><i class="zmdi zmdi-account-box-phone"></i></a></li>
-        <li><a href="#"><i class="zmdi zmdi-comments"></i></a></li>
         <li><a href="javascript:void(0);" class="fullscreen" data-provide="fullscreen"><i class="zmdi zmdi-fullscreen"></i></a></li>
         <li class="power">
             <a href="javascript:void(0);" class="js-right-sidebar"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a>
@@ -161,7 +157,7 @@
                         <li>
                             <a href="javascript:void(0);">
                                 <div class="media">
-                                    <img class="media-object rounded-circle" src="{{asset('admin   /assets/images/xs/avatar3.jpg')}}" alt="">
+                                    <img class="media-object rounded-circle" src="{{asset('admin/assets/images/xs/avatar3.jpg')}}" alt="">
                                     <div class="media-body">
                                         <span class="name">Sophia <small class="time">31min ago</small></span>
                                         <p class="message">New tasks needs to be done</p>
@@ -287,6 +283,7 @@
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Produits</span> <span class="badge badge-success float-right"></span></a>
                     <ul class="ml-menu">
+                        <li><a href="{{route('product.create')}}">Ajouter produits</a></li>
                         <li><a href="{{route('product.index')}}">Tous les produits</a></li>
                     </ul>
                 </li>
@@ -304,6 +301,14 @@
                         <li><a href="{{route('general.about')}}">À propos de nous</a></li>
                     </ul>
                 </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Praticien</span> <span class="badge badge-success float-right"></span></a>
+                        <ul class="ml-menu">
+                            <li><a href="{{route('user.create')}}">Ajouter praticien</a></li>
+                            <li><a href="{{route('user.index')}}">Tous les praticien</a></li>
+                        </ul>
+                    </li>
             </ul>
         </div>
     </div>

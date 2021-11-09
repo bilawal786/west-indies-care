@@ -24,4 +24,20 @@ class FrontendController extends Controller
     public function admin(){
         return view('auth.admin');
     }
+    public function checkout(){
+        return view('front.checkout');
+    }
+    public function addtocart(Request $request){
+        $product = Product::where('id', $request->product_id)->first();
+        \Cart::add($product->id, $product->title, $product->price, $request->quantity);
+        return redirect()->route('cartitems');
+    }
+    public function cartitems(){
+        $cartitems = \Cart::getContent();
+        return view('front.cart', compact('cartitems'));
+    }
+    public function removecart(Request $request){
+        \Cart::remove($request->id);
+        return redirect()->back();
+    }
 }
