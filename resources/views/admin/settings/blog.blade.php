@@ -26,16 +26,14 @@
                                 <tr>
                                     <td>{{$row->id}}</td>
                                     <td>
-                                        <a target="_blank" href="{{route('front.product', ['id' => $row->id])}}">
                                             {{$row->title}}
-                                        </a>
                                     </td>
-                                    <td><img src="{{asset($row->photo)}}" height="50px" alt=""></td>
+                                    <td><img src="{{asset($row->image)}}" height="50px" alt=""></td>
                                     <td>
-                                        <a href="{{route('product.edit' , ['id'=>$row->id])}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="edit">
+                                       {{-- <a href="{{route('product.edit' , ['id'=>$row->id])}}" class="btn btn-sm btn-success" data-toggle="tooltip" title="edit">
                                             <i class="material-icons">brush</i>
-                                        </a>
-                                        <a href="{{route('product.delete' , ['id'=>$row->id])}}" id="delete" class="btn btn-sm btn-danger" data-toggle="tooltip" title="edit">
+                                        </a>--}}
+                                        <a href="{{route('blog.delete' , ['id'=>$row->id])}}" id="delete" class="btn btn-sm btn-danger" data-toggle="tooltip" title="edit">
                                             <i class="material-icons">clear</i>
                                         </a>
                                     </td>

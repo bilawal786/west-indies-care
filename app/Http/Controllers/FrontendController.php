@@ -2,19 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Order;
 use App\Product;
 use App\User;
 use App\Website;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 class FrontendController extends Controller
 {
     public function index(){
+  /*      $client = new Client();
+        $response = $client->request('GET', 'http://127.0.0.1:8000/api/products');*/
+
+      /*  $response = Http::get('https://mploya.com/api/all/jobs/frontend');
+        foreach ($response->json() as $ob){
+            dd($ob['id']);
+        }
+        dd($response->json());*/
+      /* $response = Http::get('http://127.0.0.1:8000/api/products');
+        foreach ($response->json() as $ob){
+            dd($ob);
+        }
+        dd($response->json());*/
+
         $content = Website::find(1);
         $products = Product::orderBy('created_at', 'DESC')->get();
-        return view('front.index', compact('content', 'products'));
+        $blogs = Blog::orderBy('created_at', 'DESC')->get();
+        return view('front.index', compact('content', 'products', 'blogs'));
     }
     public function products(){
         $products = Product::orderBy('created_at', 'DESC')->get();
@@ -30,6 +47,10 @@ class FrontendController extends Controller
     }
     public function admin(){
         return view('auth.admin');
+    }
+    public function blog($id){
+        $blog = Blog::find($id);
+        return view('front.blog', compact('blog'));
     }
     public function checkout(){
         $cartitems = \Cart::getContent();

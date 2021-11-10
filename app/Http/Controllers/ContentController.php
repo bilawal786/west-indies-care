@@ -42,9 +42,18 @@ class ContentController extends Controller
            $name = time() . 'allimages' . '.' . $image1->getClientOriginalExtension();
            $destinationPath = 'allimages/';
            $image1->move($destinationPath, $name);
-           $blog->photo = 'allimages/' . $name;
+           $blog->image = 'allimages/' . $name;
        }
        $blog->save();
+       $notification = array(
+           'messege' => 'Sauvegarde réussie!',
+           'alert-type' => 'success'
+       );
+       return redirect()->back()->with($notification);
+   }
+   public function blogdelete($id){
+       $blog = Blog::find($id);
+       $blog->delete();
        $notification = array(
            'messege' => 'Sauvegarde réussie!',
            'alert-type' => 'success'

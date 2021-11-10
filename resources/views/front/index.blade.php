@@ -111,7 +111,7 @@
                                    22 -202 38 -98 37 -396 51 -601 27z"/>
                             </g>
                         </svg>
-                        <div class="bg_icon"><i class="mkov-candle"></i></div>
+                        <div class="bg_icon"><i class="mkov-abv"></i></div>
                         <i class="mkov-candle"></i>
                     </div>
                     <p>
@@ -280,13 +280,14 @@
             </div>
         </div>
         <div class="row">
+            @foreach($blogs as $blog)
             <div class="col-lg-4 col-md-6">
                 <div class="blog_item_01">
-                    <img src="{{asset('front/images/blog/1.jpg')}}" alt=""/>
+                    <img src="{{asset($blog->image)}}" alt=""/>
                     <div class="bp_content">
-                        <span>February 18, 2017</span>
-                        <h3><a href="#">Spring is in the Air and and So Our These Amazing Spa Offers</a></h3>
-                        <a class="lr_more" href="#">
+                        <span>{{$blog->created_at->format('D-m-y')}}</span>
+                        <h3><a href="#">{{$blog->title}}</a></h3>
+                        <a class="lr_more" href="{{route('blog.view', ['id' => $blog->id])}}">
                             Apprendre encore plus
                             <svg width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
                                 <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
@@ -295,6 +296,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>

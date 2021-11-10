@@ -104,7 +104,7 @@ $gs = \App\Website::find(1);
         .footer_01 {
             position: relative;
             overflow: hidden;
-            padding: 20px 0 0px !important;
+            padding: 20px 0 20px !important;
         }
         @media only screen and (max-width: 600px) {
             .slider_01{
@@ -123,6 +123,11 @@ $gs = \App\Website::find(1);
             .tabcontent{
                 width: 100%;
             }
+        }
+        .mainMenu {
+            position: relative;
+            line-height: .8;
+            padding: 37px 0 0 0px;
         }
     </style>
 </head>

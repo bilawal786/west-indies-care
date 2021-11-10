@@ -14,13 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'FrontendController@index')->name('front.index');
+
 Route::post('/addtocart', 'FrontendController@addtocart')->name('addtocart');
 Route::get('/cartitems', 'FrontendController@cartitems')->name('cartitems');
 Route::get('/checkout', 'FrontendController@checkout')->name('checkout')->middleware('auth');
 Route::post('/checkout/submit', 'FrontendController@checkoutSubmit')->name('checkout.submit')->middleware('auth');
 Route::get('/removecart/{id}', 'FrontendController@removecart')->name('removecart');
+
 Route::get('/contact', 'FrontendController@contact')->name('front.contact');
 Route::get('/single/product/{id}', 'FrontendController@product')->name('front.product');
+Route::get('/blog/view/{id}', 'FrontendController@blog')->name('blog.view');
 Route::get('/products', 'FrontendController@products')->name('front.products');
 Route::post('/fetchsubcategory', 'CategoryController@fetchsubcategory')->name('fetchsubcategory');
 
@@ -44,6 +47,7 @@ Route::post('/mission/store', 'ContentController@missionStore')->name('mission.s
 Route::post('/video/store', 'ContentController@videoStore')->name('video.store');
 Route::post('/about/store', 'ContentController@aboutStore')->name('about.store');
 Route::post('/blog/store', 'ContentController@blogStore')->name('blog.store');
+Route::get('/blog/delete/{id}', 'ContentController@blogdelete')->name('blog.delete');
 
 
     Route::get('/admin/order/index', 'OrderController@index')->name('admin.order.index');

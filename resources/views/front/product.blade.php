@@ -21,8 +21,10 @@
                         <h3>{{$product->title}}</h3>
                         <div class="product_price clearfix">
                                 <span class="price">
+                                    @if($product->oldprice)
                                     <del><span class="woocommerce-Price-amount amount"><bdi>{{$product->oldprice}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span></del>
-                                    <ins><span class="woocommerce-Price-amount amount"><bdi>{{$product->price}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span></ins>
+                                    @endif
+                                        <ins><span class="woocommerce-Price-amount amount"><bdi>{{$product->price}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span></ins>
                                 </span>
                         </div>
 
