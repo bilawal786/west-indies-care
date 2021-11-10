@@ -32,16 +32,18 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'web', 'role']], function() {
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/general/blog', 'ContentController@blog')->name('general.blog');
 Route::get('/general/settings', 'ContentController@settings')->name('general.settings');
 Route::get('/general/about', 'ContentController@about')->name('general.about');
 Route::get('/general/video', 'ContentController@video')->name('general.video');
 Route::get('/general/mission', 'ContentController@mission')->name('general.mission');
 Route::get('/general/slider', 'ContentController@slider')->name('general.slider');
 Route::post('/general/settings/store', 'ContentController@settingStore')->name('settings.store');
-Route::post('/slider//store', 'ContentController@sliderStore')->name('slider.store');
-Route::post('/mission//store', 'ContentController@missionStore')->name('mission.store');
-Route::post('/video//store', 'ContentController@videoStore')->name('video.store');
-Route::post('/about//store', 'ContentController@aboutStore')->name('about.store');
+Route::post('/slider/store', 'ContentController@sliderStore')->name('slider.store');
+Route::post('/mission/store', 'ContentController@missionStore')->name('mission.store');
+Route::post('/video/store', 'ContentController@videoStore')->name('video.store');
+Route::post('/about/store', 'ContentController@aboutStore')->name('about.store');
+Route::post('/blog/store', 'ContentController@blogStore')->name('blog.store');
 
 
     Route::get('/admin/order/index', 'OrderController@index')->name('admin.order.index');

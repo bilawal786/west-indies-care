@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
 use App\Website;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,29 @@ class ContentController extends Controller
    public function about(){
        $gs = Website::find(1);
        return view('admin.settings.about', compact('gs'));
+   }
+   public function blog(){
+       $blog = Blog::all();
+       return view('admin.settings.blog', compact('blog'));
+   }
+   public function blogStore(Request $request){
+       $blog = new Blog();
+       $blog->title = $request->title;
+       $blog->description = $request->description;
+
+       if ($request->hasfile('photo')) {
+           $image1 = $request->file('photo');
+           $name = time() . 'allimages' . '.' . $image1->getClientOriginalExtension();
+           $destinationPath = 'allimages/';
+           $image1->move($destinationPath, $name);
+           $blog->photo = 'allimages/' . $name;
+       }
+       $blog->save();
+       $notification = array(
+           'messege' => 'Sauvegarde réussie!',
+           'alert-type' => 'success'
+       );
+       return redirect()->back()->with($notification);
    }
    public function sliderStore(Request $request){
        $gs = Website::find(1);

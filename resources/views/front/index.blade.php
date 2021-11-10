@@ -295,36 +295,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="blog_item_01">
-                    <img src="{{asset('front/images/blog/2.jpg')}}" alt=""/>
-                    <div class="bp_content">
-                        <span>February 18, 2017</span>
-                        <h3><a href="#">We giving Amazing special spa and message service for vip.</a></h3>
-                        <a class="lr_more" href="#">
-                            Apprendre encore plus
-                            <svg width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-                                <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="blog_item_01">
-                    <img src="{{asset('front/images/blog/3.jpg')}}" alt=""/>
-                    <div class="bp_content">
-                        <span>February 18, 2017</span>
-                        <h3><a href="#">We also offer outside special spa and message catering; take-away</a></h3>
-                        <a class="lr_more" href="#">
-                            Apprendre encore plus
-                            <svg width="300%" height="100%" viewBox="0 0 1200 60" preserveAspectRatio="none">
-                                <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
