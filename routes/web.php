@@ -16,10 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'FrontendController@index')->name('front.index');
 Route::post('/addtocart', 'FrontendController@addtocart')->name('addtocart');
 Route::get('/cartitems', 'FrontendController@cartitems')->name('cartitems');
-Route::get('/checkout', 'FrontendController@checkout')->name('checkout');
+Route::get('/checkout', 'FrontendController@checkout')->name('checkout')->middleware('auth');
+Route::post('/checkout/submit', 'FrontendController@checkoutSubmit')->name('checkout.submit')->middleware('auth');
 Route::get('/removecart/{id}', 'FrontendController@removecart')->name('removecart');
 Route::get('/contact', 'FrontendController@contact')->name('front.contact');
 Route::get('/single/product/{id}', 'FrontendController@product')->name('front.product');
+Route::get('/products', 'FrontendController@products')->name('front.products');
 Route::post('/fetchsubcategory', 'CategoryController@fetchsubcategory')->name('fetchsubcategory');
 
 Route::get('/admin/login', 'FrontendController@admin')->name('admin.login');
@@ -42,6 +44,11 @@ Route::post('/video//store', 'ContentController@videoStore')->name('video.store'
 Route::post('/about//store', 'ContentController@aboutStore')->name('about.store');
 
 
+    Route::get('/admin/order/index', 'OrderController@index')->name('admin.order.index');
+    Route::get('/admin/order/complete', 'OrderController@complete')->name('admin.order.complete');
+    Route::get('/admin/order/view/{id}', 'OrderController@view')->name('admin.order.view');
+    Route::get('/admin/order/status/{id}', 'OrderController@status')->name('admin.order.status');
+
     Route::get('/user/index', 'UserController@index')->name('user.index');
     Route::get('/user/create', 'UserController@create')->name('user.create');
     Route::post('/user/store', 'UserController@store')->name('user.store');
@@ -63,4 +70,12 @@ Route::post('/about//store', 'ContentController@aboutStore')->name('about.store'
     Route::post('/product/store', 'ProductController@store')->name('product.store');
     Route::post('/product/update/{id}', 'ProductController@update')->name('product.update');
 
+});
+
+Route::group(['middleware' => ['auth', 'web']], function() {
+    Route::get('/order/index', 'FrontendController@orderDetails')->name('order.index');
+
+    Route::get('/user/order/details/{id}', 'FrontendController@orderDetails')->name('user.order-detail');
+    Route::get('/user/dashboard', 'FrontendController@userDashboard')->name('user.dashboard');
+    Route::post('/user/profileupdate', 'FrontendController@profileupdate')->name('user.profileupdate');
 });

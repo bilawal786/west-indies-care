@@ -4,21 +4,20 @@
     <!-- Begin:: Checkout Section -->
     <section class="cartPage">
         <div class="container" style="margin-top: 50px">
+            <form action="{{route('checkout.submit')}}" method="POST" id="payment-form" enctype="multipart/form-data">
+                @csrf
             <div class="row woocommerce">
                 <div class="col-md-6">
                     <div class="woocommerce-billing-fields">
-                        <h3>Billing Info</h3>
+                        <h3>Informations de facturation</h3>
                         <div class="row">
                             <p class="col-lg-6">
-                                <input placeholder="First name *" name="first_name" type="text">
+                                <input placeholder="First name *" value="{{$user->fname}}" name="fname" type="text">
                             </p>
                             <p class="col-lg-6">
-                                <input placeholder="Last name *" name="last_name" type="text">
+                                <input placeholder="Last name *"  value="{{$user->lname}}"  name="lname" type="text">
                             </p>
-                            <p class="col-lg-12">
-                                <input placeholder="Company name" name="company" type="text">
-                            </p>
-                            <div class="col-lg-12">
+<!--                            <div class="col-lg-12">
                                 <div class="billing-countries">
                                     <select class="country_to_state country_select " id="billing_country" name="billing_country">
                                         <option value="">State / Country *</option>
@@ -268,99 +267,53 @@
                                         <option value="ZW">Zimbabwe</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                             <p class="col-lg-12">
-                                <input placeholder="House number and street name" name="address_1" type="text">
-                            </p>
-                            <p class="col-lg-12">
-                                <input placeholder="Apartment, suite, unit, etc. (optional)" name="address_2" type="text">
+                                <input placeholder="Numéro de maison et nom de rue" value="{{$user->address}}"  name="address" type="text">
                             </p>
                             <p class="col-lg-12">
-                                <input placeholder="Town / City *" name="address_2" type="text">
+                                <input placeholder="Phone *" value="{{$user->phone}}" name="phone" type="tel">
                             </p>
                             <p class="col-lg-12">
-                                <input placeholder="County" name="County" type="text">
+                                <input placeholder="Email address *" value="{{$user->email}}" name="email" type="email">
                             </p>
                             <p class="col-lg-12">
-                                <input placeholder="Postcode *" name="postcode" type="text">
-                            </p>
-                            <p class="col-lg-12">
-                                <input placeholder="Phone *" name="phone" type="tel">
-                            </p>
-                            <p class="col-lg-12">
-                                <input placeholder="Email address *" name="billing_email" type="email">
-                            </p>
-                            <p class="col-lg-12 create-account">
-                                <input name="account" value="1" type="checkbox" id="cac">
-                                <label for="cac">Create an account?</label>
-                            </p>
-                            <p class="col-lg-12 create-account shippDifferent">
-                                <input name="ship-address" value="2" type="checkbox" id="ship_add">
-                                <label for="ship_add">Ship to another address</label>
+                                <input required placeholder="Code postal *" value="{{$user->postal}}" name="postal" type="text">
                             </p>
                             <p class="col-lg-12 order-note">
-                                <textarea name="order" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                <textarea name="notes" placeholder="Notes sur votre commande, par ex. notes spéciales pour la livraison."></textarea>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h3 id="order_review_heading">Your order</h3>
+                    <h3 id="order_review_heading">Votre commande</h3>
                     <div class="woocommerce-checkout-review-order checkout_page_only" id="order_review">
                         <table class="shop_table woocommerce-checkout-review-order-table">
                             <thead>
                             <tr>
-                                <th class="product-name">Product</th>
-                                <th class="product-total">Subtotal</th>
+                                <th class="product-name">Produit</th>
+                                <th class="product-total">Quantité</th>
+                                <th class="product-total">Total</th>
                             </tr>
                             </thead>
                             <tbody>
+                            @foreach($cartitems as $cart)
                             <tr class="cart-item">
-                                <td class="product-name">Cum sociis natoque</td>
+                                <td class="product-name">{{$cart->name}}</td>
+                                <td class="product-name">{{$cart->quantity}}</td>
                                 <td class="product-total">
-                                    <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>14.00</bdi></span>
+                                    <span class="woocommerce-Price-amount amount"><bdi>{{$cart->price * $cart->quantity}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span>
                                 </td>
                             </tr>
-                            <tr class="cart-item">
-                                <td class="product-name">Habitant morbi tristique</td>
-                                <td class="product-total">
-                                    <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>28.00</bdi></span>
-                                </td>
-                            </tr>
-                            <tr class="cart-item">
-                                <td class="product-name">Aenean ultricies</td>
-                                <td class="product-total">
-                                    <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>24.00</bdi></span>
-                                </td>
-                            </tr>
+                            @endforeach
                             </tbody>
                             <tfoot>
                             <tr class="cart-subtotal">
-                                <th>Subtotal</th>
-                                <td>
-                                    <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>121.00</bdi></span>
-                                </td>
-                            </tr>
-                            <tr class="woocommerce-shipping-totals shipping">
-                                <th>Shipping</th>
-                                <td data-title="Shipping">
-                                    <ul id="shipping_method" class="woocommerce-shipping-methods">
-                                        <li>
-                                            <input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_flat_rate1" value="flat_rate:1" class="shipping_method" checked="checked"><label for="shipping_method_0_flat_rate1">Flat rate: <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>10.00</bdi></span></label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_free_shipping2" value="free_shipping:2" class="shipping_method"><label for="shipping_method_0_free_shipping2">Free shipping</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" name="shipping_method[0]" data-index="0" id="shipping_method_0_local_pickup3" value="local_pickup:3" class="shipping_method"><label for="shipping_method_0_local_pickup3">Local pickup: <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>10.00</bdi></span></label>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr class="order-total">
                                 <th>Total</th>
                                 <td>
-                                    <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>159.00</bdi></span>
+                                    <input type="hidden" name="total" value="{{$total}}">
+                                    <span class="woocommerce-Price-amount amount"><bdi>{{$total}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span>
                                 </td>
                             </tr>
                             </tfoot>
@@ -369,45 +322,44 @@
                             <ul class="wc_payment_methods payment_methods methods">
                                 <li class="wc_payment_method payment_method_bacs">
                                     <input checked="checked" value="bacs" name="payment_method" class="input-radio" id="payment_method_bacs" type="radio">
-                                    <label for="payment_method_bacs">Direct bank transfer</label>
+                                    <label for="payment_method_bacs">Payez via votre carte</label>
                                     <div class="payment_box payment_method_bacs visibales">
-                                        <p>
-                                            Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="wc_payment_method payment_method_cod">
-                                    <input value="cod" name="payment_method" class="input-radio" id="payment_method_cod" type="radio">
-                                    <label for="payment_method_cod">Cheque Payment</label>
-                                    <div class="payment_box payment_method_cod">
-                                        <p>
-                                            Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="wc_payment_method payment_method_paypal">
-                                    <input value="paypal" name="payment_method" class="input-radio" id="payment_method_paypal" type="radio">
-                                    <label for="payment_method_paypal">Cash On Delivery</label>
-                                    <div class="payment_box payment_method_paypal">
-                                        <p>
-                                            Pay with cash upon delivery.
-                                        </p>
+                                        <div class="payment-method">
+                                            <div class="payment-accordion">
+                                                <div class="order-button-payment">
+                                                    <div class="clearfix">
+                                                        <label>Moyen de paiement <span class="required">*</span></label>
+                                                        <select name="pay" class="form-control" id="pay">
+                                                            <option value="complete">Payer par carte bancaire</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group stripe-payment-method-div">
+                                                        <label>{{ __('Carte bancaire') }}</label> <span class="text-danger">*</span>
+                                                        <div id="card-element"></div>
+                                                        <div id="card-errors" class="text-danger" role="alert"></div>
+                                                    </div>
+                                                    <input id="card-button" class="btn btn-default" value="Payer" type="submit" data-secret="{{ $intent }}">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <div class="place-order">
-                            <div class="woocommerce-terms-and-conditions-wrapper">
-                                <div class="woocommerce-privacy-policy-text">
-                                    <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="http://themewar.com/wp/prologue/?page_id=3" class="woocommerce-privacy-policy-link" target="_blank">privacy policy</a>.</p>
-                                </div>
-                            </div>
-                            <button type="submit" class="button">Place Order</button>
-                        </div>
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </section>
     <!-- End:: Checkout Section -->
+@endsection
+@section('script')
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const stripeKey = "{{ env('STRIPE_PUBLISHABLE_KEY') }}";
+    </script>
+    <script src="js/stripe.js"></script>
+    <script>
 @endsection

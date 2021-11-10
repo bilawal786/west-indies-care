@@ -33,11 +33,61 @@ $gs = \App\Website::find(1);
     <link rel="stylesheet" href="{{asset('front/css/theme.css')}}"/>
     <link rel="stylesheet" href="{{asset('front/css/responsive.css')}}"/>
     <!-- End Include All CSS -->
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- Favicon Icon -->
     <link rel="icon"  type="image/png" href="{{asset('front/images/favicon.png')}}">
     <!-- Favicon Icon -->
     <style>
+        .btn-default{
+            background-color: #f7a392;
+            color: white;
+        }
+        /* Style the tab */
+        .tab {
+            float: left;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            width: 20%;
+            height: auto;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            display: block;
+            background-color: inherit;
+            color: black;
+            padding: 22px 16px;
+            width: 100%;
+            border: none;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current "tab button" class */
+        .tab button.active {
+            background-color: #f7a392;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            float: left;
+            padding: 0px 12px;
+            border: 1px solid #ccc;
+            width: 80%;
+            border-left: none;
+            height: auto;
+        }
+        .mobileslider{
+            display: none;
+        }
         .actionBox{
             position: relative;
             background: url({{asset($gs->mimage1)}}) no-repeat right bottom #f0f0f1;
@@ -50,6 +100,29 @@ $gs = \App\Website::find(1);
         }
         .abBg2{
             background: url({{asset($gs->mimage2)}}) no-repeat right bottom #e9f9fd;
+        }
+        .footer_01 {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0 0px !important;
+        }
+        @media only screen and (max-width: 600px) {
+            .slider_01{
+                display: none;
+            }
+            .mobileslider{
+                display: block;
+            }
+            .mySlides {display:none;}
+            #mission{
+                padding-top: 50px;
+            }
+            .tab{
+                width: 100%;
+            }
+            .tabcontent{
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -77,7 +150,12 @@ $gs = \App\Website::find(1);
                         <li><a href="{{route('front.index')}}#about">À propos</a></li>
                         <li><a href="{{route('front.index')}}#blog">Blog</a></li>
                         <li><a href="{{route('front.contact')}}">Contacts</a></li>
+                        @guest
                         <li><a href="{{route('front.index')}}#espace">Espace Praticien</a></li>
+                        @endguest
+                        @auth
+                        <li><a href="{{route('user.dashboard')}}">Espace Praticien</a></li>
+                        @endauth
                     </ul>
                 </nav>
             </div>
@@ -236,5 +314,45 @@ $gs = \App\Website::find(1);
 
 <script src="{{asset('front/js/theme.js')}}"></script>
 <!-- End Include All JS -->
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = x.length}
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex-1].style.display = "block";
+    }
+</script>
+
+
+<script>
+    function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+@yield('script')
 </body>
 </html>

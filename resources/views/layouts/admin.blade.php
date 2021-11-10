@@ -309,6 +309,13 @@
                             <li><a href="{{route('user.index')}}">Tous les praticien</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Commandes</span> <span class="badge badge-success float-right"></span></a>
+                        <ul class="ml-menu">
+                            <li><a href="{{route('admin.order.index')}}">Nouvelles commandes</a></li>
+                            <li><a href="{{route('admin.order.complete')}}">Commandes traiter</a></li>
+                        </ul>
+                    </li>
             </ul>
         </div>
     </div>

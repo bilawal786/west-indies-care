@@ -19,7 +19,14 @@
     </div>
 </section>
 <!-- End:: Slider Section -->
+<div class="w3-content w3-display-container mobileslider">
+    <img class="mySlides" src="{{asset($content->simage1)}}" style="width:100%; height: 400px">
+    <img class="mySlides" src="{{asset($content->simage2)}}" style="width:100%; height: 400px">
+    <img class="mySlides" src="{{asset($content->simage3)}}" style="width:100%; height: 400px">
 
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
 <!-- Begin:: Welcome Section -->
 <section class="commonSection welcomeSection" id="mission">
     <div class="container">
@@ -195,10 +202,10 @@
             <div class="col-lg-6 col-md-6">
                 <div class="abContent">
                     <h2>
-                        Connectez-vous a <span class="fontWeight400 colorPrimary">Votre Compte</span>
+                        Connectez-vous à <span class="fontWeight400 colorPrimary">Votre Compte</span>
                     </h2>
                     <p>
-                        Connectez-vous à votre compte pour <br> Espace Praticien
+                       Espace Praticien
                     </p>
                     <a href="{{route('login')}}" class="mo_btn mob_lg mob_shadow"><i class="icofont-long-arrow-right"></i>Connexion</a>
                 </div>
@@ -209,46 +216,6 @@
 <!-- End:: Espace Section -->
 @endguest
 
-@auth
-<!-- Begin:: Products Section -->
-<section class="shopPage">
-    <div class="container">
-        <div class="row">
-            @foreach($products as $pro)
-            <div class="col-lg-3 col-md-6">
-                <div class="product_item text-center">
-                    <div class="pi_thumb">
-                        <img src="{{asset($pro->photo)}}" alt=""/>
-                        <div class="pi_01_actions">
-                            <a href=""><i class="icofont-cart-alt"></i></a>
-                            <a href="{{route('front.product', ['id' => $pro->id])}}"><i class="icofont-eye"></i></a>
-                        </div>
-                    </div>
-                    <div class="pi_content">
-                        <p><a href="">{{$pro->category->name}}</a></p>
-                        <h3><a href="{{route('front.product', ['id' => $pro->id])}}">{{$pro->title}}</a></h3>
-                        <div class="product_price clearfix">
-                            <span class="price"><span class="woocommerce-Price-amount amount"><bdi>{{$pro->price}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-        {{--<div class="row">
-            <div class="col-lg-12">
-                <div class="make_pagination text-center">
-                    <span class="current">1</span>
-                    <a href="shop.html">2</a>
-                    <a href="shop.html">3</a>
-                    <a class="next" href="shop.html"><i class="icofont-simple-right"></i></a>
-                </div>
-            </div>
-        </div>--}}
-    </div>
-</section>
-<!-- End:: Products Section -->
-@endauth
 
 <!-- Begin:: Appointment Section -->
 <section class="commonSection">

@@ -1,6 +1,5 @@
 @extends('layouts.front')
 @section('content')
-    <!-- Begin:: Cart Section -->
     <section class="cartPage" >
         <div class="container" style="margin-top: 50px">
             <div class="row">
@@ -49,8 +48,12 @@
                                         <table class="shop_table shop_table_responsive">
                                             <tbody>
                                             <tr class="cart-subtotal">
+                                                <th>Articles au total</th>
+                                                <td data-title="Subtotal"><span class="amount">{{$cartTotalQuantity}}</span></td>
+                                            </tr>
+                                            <tr class="cart-subtotal">
                                                 <th>Total</th>
-                                                <td data-title="Subtotal"><span class="amount">5</span></td>
+                                                <td data-title="Subtotal"><span class="amount">{{$total}} €</span></td>
                                             </tr>
                                             </tbody>
                                         </table>

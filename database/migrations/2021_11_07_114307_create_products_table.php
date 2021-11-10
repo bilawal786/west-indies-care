@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('oldprice')->nullable();
             $table->string('sku');
             $table->string('photo');
-            $table->string('gallery')->nullable();
+            $table->longText('gallery')->nullable();
             $table->string('type')->nullable();
             $table->string('status')->nullable();
             $table->longText('description')->nullable();
