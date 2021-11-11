@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Coupon;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -28,6 +29,31 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->password = Hash::make($request->password);
         $user->save();
+        $notification = array(
+            'messege' => 'Sauvegarde réussie!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+    public function coupon(){
+        $coupon = Coupon::all();
+        return view('admin.user.coupon', compact('coupon'));
+    }
+    public function couponstore(Request $request){
+        $couponstore = new Coupon();
+        $couponstore->title = $request->title;
+        $couponstore->discount = $request->discount;
+        $couponstore->code = $request->code;
+        $couponstore->save();
+        $notification = array(
+            'messege' => 'Sauvegarde réussie!',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+    public function couponDelete($id){
+        $couponDelete = Coupon::find($id);
+        $couponDelete->delete();
         $notification = array(
             'messege' => 'Sauvegarde réussie!',
             'alert-type' => 'success'

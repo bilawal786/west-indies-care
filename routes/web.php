@@ -55,6 +55,9 @@ Route::get('/blog/delete/{id}', 'ContentController@blogdelete')->name('blog.dele
     Route::get('/admin/order/view/{id}', 'OrderController@view')->name('admin.order.view');
     Route::get('/admin/order/status/{id}', 'OrderController@status')->name('admin.order.status');
 
+    Route::get('/coupon/index', 'UserController@coupon')->name('coupon.index');
+    Route::get('/coupon/delete/{id}', 'UserController@couponDelete')->name('coupon.delete');
+    Route::post('/coupon/store', 'UserController@couponstore')->name('coupon.store');
     Route::get('/user/index', 'UserController@index')->name('user.index');
     Route::get('/user/create', 'UserController@create')->name('user.create');
     Route::post('/user/store', 'UserController@store')->name('user.store');

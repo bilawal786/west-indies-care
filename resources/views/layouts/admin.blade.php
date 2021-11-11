@@ -308,6 +308,7 @@
                         <ul class="ml-menu">
                             <li><a href="{{route('user.create')}}">Ajouter praticien</a></li>
                             <li><a href="{{route('user.index')}}">Tous les praticien</a></li>
+                            <li><a href="{{route('coupon.index')}}">Code de coupon</a></li>
                         </ul>
                     </li>
                     <li>
