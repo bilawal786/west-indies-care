@@ -232,27 +232,6 @@
             </div>
         </div>
     </div>
-    @php
-
-        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-        {
-          $link = "https";
-        }
-        else
-        {
-          $link = "http";
-
-          // Here append the common URL characters.
-          $link .= "://";
-
-          // Append the host(domain name, ip) to the URL.
-          $link .= $_SERVER['HTTP_HOST'];
-
-          // Append the requested resource location to the URL
-          $link .= $_SERVER['REQUEST_URI'];
-        }
-
-    @endphp
     <div id="leftsidebar" class="sidebar">
         <div class="menu">
             <ul class="list">
@@ -262,17 +241,15 @@
                             <a href="#"><img src="{{asset('admin/assets/images/profile_av.jpg')}}" alt="User"></a>
                         </div>
                         <div class="detail">
-                            <h6>Admin</h6>
-                            <p class="m-b-0">admin@gmail.com</p>
+                            <h6>{{Auth::user()->fname}} {{Auth::user()->lname}}</h6>
+                            <p class="m-b-0">{{Auth::user()->email}}</p>
                             <a href="javascript:void(0);" title="" class=" waves-effect waves-block"><i class="zmdi zmdi-facebook-box"></i></a>
-                            <a href="javascript:void(0);" title="" class=" waves-effect waves-block"><i class="zmdi zmdi-linkedin-box"></i></a>
                             <a href="javascript:void(0);" title="" class=" waves-effect waves-block"><i class="zmdi zmdi-instagram"></i></a>
-                            <a href="javascript:void(0);" title="" class=" waves-effect waves-block"><i class="zmdi zmdi-twitter-box"></i></a>
                         </div>
                     </div>
                 </li>
                 <li class="header">MAIN</li>
-                <li class="{{ $link == route('home') ? 'active open':'' }}"> <a href="{{route('home')}}"><i class="zmdi zmdi-home"></i><span>Tableau de bord</span></a></li>
+                <li class="{{ request()->is('home') ? 'active open':'' }}"> <a href="{{route('home')}}"><i class="zmdi zmdi-home"></i><span>Tableau de bord</span></a></li>
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Catégories</span> <span class="badge badge-success float-right"></span></a>
                     <ul class="ml-menu">
@@ -280,14 +257,14 @@
                         {{--<li><a href="{{route('subcategory.index')}}">Sous-catégories</a></li>--}}
                     </ul>
                 </li>
-                <li>
+                <li class="{{ request()->is('product/*') ? 'active open':'' }}">
                     <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Produits</span> <span class="badge badge-success float-right"></span></a>
                     <ul class="ml-menu">
                         <li><a href="{{route('product.create')}}">Ajouter produits</a></li>
                         <li><a href="{{route('product.index')}}">Tous les produits</a></li>
                     </ul>
                 </li>
-                @if($link == route('general.settings') || $link == route('general.slider') || $link == route('general.mission') || $link == route('general.video')|| $link == route('general.about'))
+                @if( request()->is('general/*'))
                 <li class="active open">
                     @else
                     <li>
@@ -303,7 +280,7 @@
                     </ul>
                 </li>
 
-                    <li>
+                    <li class="{{ request()->is('user/*') ? 'active open':'' }}">
                         <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Praticien</span> <span class="badge badge-success float-right"></span></a>
                         <ul class="ml-menu">
                             <li><a href="{{route('user.create')}}">Ajouter praticien</a></li>
@@ -311,7 +288,7 @@
                             <li><a href="{{route('coupon.index')}}">Code de coupon</a></li>
                         </ul>
                     </li>
-                    <li>
+                    <li class="{{ request()->is('admin/order/*') ? 'active open':'' }}">
                         <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Commandes</span> <span class="badge badge-success float-right"></span></a>
                         <ul class="ml-menu">
                             <li><a href="{{route('admin.order.index')}}">Nouvelles commandes</a></li>
