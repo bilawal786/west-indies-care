@@ -37,6 +37,8 @@ $gs = \App\Website::find(1);
     <!-- Favicon Icon -->
     <link rel="icon"  type="image/png" href="{{asset('front/images/favicon.png')}}">
     <!-- Favicon Icon -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <style>
         .btn-default{
             background-color: #f7a392;

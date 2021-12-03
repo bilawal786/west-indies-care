@@ -29,9 +29,9 @@
                         </div>
 
                         <div class="pd_excrpt">
-                            <p>
-                              {{$product->description}}
-                            </p>
+{{--                            <p>--}}
+{{--                              {{$product->description}}--}}
+{{--                            </p>--}}
                         </div>
                         <form method="POST" action="{{route('addtocart')}}">
                             @csrf

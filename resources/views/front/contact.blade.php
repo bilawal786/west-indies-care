@@ -15,7 +15,7 @@
                     <div class="sectionTitle text-center">
                         <img src="{{asset('front/images/icons/2.png')}}" alt="">
                         <h5 class="primaryFont">Nous contacter</h5>
-                        <h2> Envoyez-nous un <span class="colorPrimary fontWeight400">Ligne</span></h2>
+                        <h2> Envoyez-nous un <span class="colorPrimary fontWeight400">Message</span></h2>
                     </div>
                 </div>
             </div>
@@ -38,11 +38,9 @@
                                         <div class="input-field col-lg-6 select-area">
                                             <select class="required" name="selec">
                                                 <option selected="selected">Sélectionnez le sujet</option>
-                                                <option value="Sports Massage">Sports Massage</option>
-                                                <option value="Stone Massage">Stone Massage</option>
-                                                <option value="Body Massage">Body Massage</option>
-                                                <option value="Head Massage">Head Massage</option>
-                                                <option value="Facial Massage">Facial &amp; Massage</option>
+                                                @foreach($categories as $cat)
+                                                    <option value="{{$cat->name}}">{{$cat->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="input-field col-lg-12">

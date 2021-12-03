@@ -309,8 +309,20 @@
                             @endforeach
                             </tbody>
                             <tfoot>
+                            @if(Session::get('before_discount_total'))
+                                <tr class="cart-subtotal">
+                                    <th>Total</th>
+                                    <td data-title="Subtotal"><span class="amount">{{Session::get('before_discount_total')}} €</span></td>
+                                </tr>
+                            @endif
+                            @if(Session::get('coupon'))
+                                <tr class="cart-subtotal">
+                                    <th>Remise</th>
+                                    <td data-title="Subtotal"><span class="amount">{{Session::get('coupon')}} %</span></td>
+                                </tr>
+                            @endif
                             <tr class="cart-subtotal">
-                                <th>Total</th>
+                                <th>Le montant final</th>
                                 <td>
                                     <input type="hidden" name="total" value="{{$total}}">
                                     <span class="woocommerce-Price-amount amount"><bdi>{{$total}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span>

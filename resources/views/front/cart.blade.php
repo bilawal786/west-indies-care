@@ -5,7 +5,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="woocommerce">
-                        <form action="#" method="post" class="woocommerce-cart-form">
                             <table class="shop_table">
                                 <thead>
                                 <tr>
@@ -36,9 +35,22 @@
                                     </td>
                                 </tr>
                                 @endforeach
+                                <tr>
+                                    <td colspan="6" class="actions">
+                                        <form action="" id="couponform">
+                                            <h3 class="successalert" style="color: green;"></h3>
+                                            <h3 class="erroralert" style="color: red;"></h3>
+                                        <div class="coupon">
+                                            <label for="coupon_code">Coupon:</label>
+                                            <input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="Code de réduction">
+                                            <button type="submit" class="button" name="apply_coupon" value="Apply coupon">Appliquer Coupon</button>
+                                        </div>
+                                        </form>
+                                        <a href="{{route('cart.reset')}}"> <button type="submit" class="button update" name="update_cart" value="Update cart">Réinitialiser le panier</button></a>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
-                        </form>
                         <div class="row">
                             <div class="col-xl-7 col-lg-6 col-md-4"></div>
                             <div class="col-xl-5 col-lg-6 col-md-8">
@@ -51,8 +63,20 @@
                                                 <th>Articles au total</th>
                                                 <td data-title="Subtotal"><span class="amount">{{$cartTotalQuantity}}</span></td>
                                             </tr>
+                                            @if(Session::get('before_discount_total'))
                                             <tr class="cart-subtotal">
                                                 <th>Total</th>
+                                                <td data-title="Subtotal"><span class="amount">{{Session::get('before_discount_total')}} €</span></td>
+                                            </tr>
+                                            @endif
+                                            @if(Session::get('coupon'))
+                                            <tr class="cart-subtotal">
+                                                <th>Remise</th>
+                                                <td data-title="Subtotal"><span class="amount">{{Session::get('coupon')}} %</span></td>
+                                            </tr>
+                                            @endif
+                                            <tr class="cart-subtotal">
+                                                <th>Le montant final</th>
                                                 <td data-title="Subtotal"><span class="amount">{{$total}} €</span></td>
                                             </tr>
                                             </tbody>
@@ -69,4 +93,32 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script>
+        $("#couponform").submit(function(){
+            event.preventDefault();
+            let code = $('#coupon_code').val();
+            let _token   = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                url: "{{route('redeemcoupon')}}",
+                type:"POST",
+                data:{
+                    code:code,
+                    _token: _token
+                },
+                success:function(response){
+                    if(response.success) {
+
+                        $('.successalert').html(response.success);
+                        location.reload();
+
+                    }else if(response.error){
+                        $('.erroralert').html(response.error);
+                    }
+                },
+            });
+        });
+    </script>
 @endsection

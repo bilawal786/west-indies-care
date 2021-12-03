@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Blog;
+use App\Category;
+use App\Coupon;
 use App\Order;
 use App\Product;
 use App\User;
 use App\Website;
+use Darryldecode\Cart\CartCondition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
+use Session;
 class FrontendController extends Controller
 {
     public function index(){
@@ -38,8 +42,9 @@ class FrontendController extends Controller
         return view('front.products', compact('products'));
     }
     public function contact(){
+        $categories = Category::all();
         $content = Website::find(1);
-        return view('front.contact', compact('content'));
+        return view('front.contact', compact('content', 'categories'));
     }
     public function product($id){
         $product = Product::find($id);
@@ -76,7 +81,8 @@ class FrontendController extends Controller
         $cartitems = \Cart::getContent();
         $cartTotalQuantity = \Cart::getTotalQuantity();
         $total = \Cart::getTotal();
-        return view('front.cart', compact('cartitems', 'cartTotalQuantity', 'total'));
+        $cartSubTotal = \Cart::getSubTotal();
+        return view('front.cart', compact('cartitems', 'cartTotalQuantity', 'total', 'cartSubTotal'));
     }
     public function removecart(Request $request){
         \Cart::remove($request->id);
@@ -174,5 +180,36 @@ class FrontendController extends Controller
     public function orderDetails($id){
         $order = Order::where('id', $id)->first();
         return view('user.orderdetails', compact('order'));
+    }
+    public function redeemcoupon(Request $request){
+        $coupon = Coupon::where('code', $request->code)->first();
+        if ($coupon){
+            if (Session::get('coupon')){
+                return response()->json(['error' => 'Vous avez déjà appliqué le code une fois']);
+            }else{
+                $total = \Cart::getTotal();
+                Session::put('before_discount_total', $total);
+
+                $coupon101 = new CartCondition(array(
+                    'name' => 'COUPON '.$coupon->discount.'%',
+                    'type' => 'coupon',
+                    'value' => '-'.$coupon->discount.'%',
+                ));
+                $cartitems = \Cart::getContent();
+                foreach ($cartitems as $item){
+                    \Cart::addItemCondition($item->id, $coupon101);
+                }
+                Session::put('coupon', $coupon->discount);
+                return response()->json(['success' => 'Code promotionnel appliqué avec succès', 'discount' => $coupon->discount]);
+            }
+        }else{
+            return response()->json(['error' => 'Le code est invalide ou expire']);
+        }
+    }
+    public function cartReset(){
+        \Cart::clear();
+        Session::forget('coupon');
+        Session::forget('before_discount_total');
+        return redirect()->back();
     }
 }

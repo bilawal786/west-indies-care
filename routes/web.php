@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'FrontendController@index')->name('front.index');
 
+Route::post('/redeemcoupon', 'FrontendController@redeemcoupon')->name('redeemcoupon');
+
+Route::get('/cart/reset', 'FrontendController@cartReset')->name('cart.reset');
 Route::post('/addtocart', 'FrontendController@addtocart')->name('addtocart');
 Route::get('/cartitems', 'FrontendController@cartitems')->name('cartitems');
 Route::get('/checkout', 'FrontendController@checkout')->name('checkout')->middleware('auth');

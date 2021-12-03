@@ -4,7 +4,12 @@
         <div class="container" style="margin-top: 50px">
             <div class="row">
                 <div class="col-lg-12">
-
+                    <img src="{{asset('front/images/6.png')}}" style="width: 100%" alt="">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-12">
                     <div class="tab">
                         <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Tableau de bord</button>
                         <a href="{{route('front.products')}}"> <button class="tablinks">Produits</button></a>
@@ -20,8 +25,12 @@
                     </div>
 
                     <div id="London" class="tabcontent">
-                        <h3>Bonjour <b>{{Auth::user()->fname}} {{Auth::user()->lname}} , </b>
-                            Bienvenue dans le tableau de bord praticien</h3>
+                        <h3>Bonjour <b>{{Auth::user()->fname}} {{Auth::user()->lname}} , </b></h3>
+                            <br>
+                        <h3> Bienvenue dans votre espace privé, vous y trouverez tout nos produits. à votre tarif praticiens.</h3>
+                        <br>
+                        <h3> Vous y touverez egalement vos commandes, et le détails de votre compte.</h3>
+                        <br>
                     </div>
 
                     <div id="Paris" class="tabcontent">
