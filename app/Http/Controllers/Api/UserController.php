@@ -39,10 +39,10 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'fname' => 'required',
             'lname' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'role'  => 'required',
             'password' => 'required',
-            'confirmPassword' => 'required|same:password',
+            'confirm_password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()], 401);
@@ -50,11 +50,8 @@ class UserController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['id'] =  $user->id;
         $success['token'] =  $user->createToken('MyApp')-> accessToken;
-
-
-        return response()->json(['data'=>$success , 'success' => true], $this->successStatus);
+        return response()->json($success);
     }
     /**
      * details api
