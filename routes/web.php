@@ -53,6 +53,9 @@ Route::post('/blog/store', 'ContentController@blogStore')->name('blog.store');
 Route::get('/blog/delete/{id}', 'ContentController@blogdelete')->name('blog.delete');
 
 
+    Route::get('/clients/order/index', 'OrderController@clientsindex')->name('admin.clients.order.index');
+    Route::get('/clients/order/complete', 'OrderController@clientscomplete')->name('admin.clients.order.complete');
+
     Route::get('/admin/order/index', 'OrderController@index')->name('admin.order.index');
     Route::get('/admin/order/complete', 'OrderController@complete')->name('admin.order.complete');
     Route::get('/admin/order/view/{id}', 'OrderController@view')->name('admin.order.view');
@@ -64,6 +67,8 @@ Route::get('/blog/delete/{id}', 'ContentController@blogdelete')->name('blog.dele
     Route::get('/user/index', 'UserController@index')->name('user.index');
     Route::get('/user/create', 'UserController@create')->name('user.create');
     Route::post('/user/store', 'UserController@store')->name('user.store');
+
+    Route::get('/admin/clients/index', 'UserController@clients')->name('admin.clients.index');
 
     Route::get('/category/index', 'CategoryController@index')->name('category.index');
     Route::get('/category/delete/{id}', 'CategoryController@delete')->name('category.delete');

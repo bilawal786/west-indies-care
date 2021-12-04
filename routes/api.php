@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 
 
+Route::post('/websites/order', 'Api\ApiController@order');
+
 Route::get('/products', 'Api\ApiController@products');
 Route::get('/product/{id}', 'Api\ApiController@product');
 

@@ -295,6 +295,19 @@
                             <li><a href="{{route('admin.order.complete')}}">Commandes traiter</a></li>
                         </ul>
                     </li>
+                    <li class="{{ request()->is('clients/order/*') ? 'active open':'' }}">
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Web Commandes</span> <span class="badge badge-success float-right"></span></a>
+                        <ul class="ml-menu">
+                            <li><a href="{{route('admin.clients.order.index')}}">Web Nouvelles commandes</a></li>
+                            <li><a href="{{route('admin.clients.order.complete')}}">Web Commandes traiter</a></li>
+                        </ul>
+                    </li>
+                    <li class="{{ request()->is('admin/clients/*') ? 'active open':'' }}">
+                        <a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-apps"></i><span>Clients</span> <span class="badge badge-success float-right"></span></a>
+                        <ul class="ml-menu">
+                            <li><a href="{{route('admin.clients.index')}}">Tous les Clients</a></li>
+                        </ul>
+                    </li>
             </ul>
         </div>
     </div>

@@ -16,6 +16,10 @@ class UserController extends Controller
         $users = User::where('role', 1)->get();
         return view('admin.user.index', compact('users'));
     }
+    public function clients(){
+        $users = User::where('role', 2)->get();
+        return view('admin.user.clients', compact('users'));
+    }
     public function store(Request$request){
         $validator=$request->validate([
             'email' => 'required|string|email|max:255|unique:users',
