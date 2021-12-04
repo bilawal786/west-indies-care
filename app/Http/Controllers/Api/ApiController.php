@@ -21,21 +21,9 @@ class ApiController extends Controller
         return response()->json($product);
     }
     public function order(Request $request){
-        $validator=$request->validate([
-            'email' => 'required|string|email|max:255|unique:users',
-        ]);
-        $user = new User();
-        $user->fname = $request->fname;
-        $user->role = 2;
-        $user->website = $request->website;
-        $user->lname = $request->lname;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->password = Hash::make(12345678);
-        $user->save();
 
         $order = new Order();
-        $order->user_id = $user->id;
+        $order->user_id = $request->user_id;
         $order->fname = $request->cfname;
         $order->lname = $request->clname;
         $order->email = $request->cemail;
