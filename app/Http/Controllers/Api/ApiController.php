@@ -39,8 +39,8 @@ class ApiController extends Controller
         $order->save();
         return response()->json(['success' => 'Success']);
     }
-    public function websiteOrders($website){
-        $orders = Order::where('website', $website)->get();
+    public function websiteOrders($status, $website){
+        $orders = Order::where('website', $website)->where('status', $status)->where('paymentstatus', 1)->get();
         return response()->json($orders);
     }
 }
