@@ -47,4 +47,11 @@ class ApiController extends Controller
         $order = Order::find($id);
         return response()->json($order);
     }
+    public function orderStatus($id){
+        $order = Order::find($id);
+        $order->status = '2';
+        $order->update();
+        return response()->json(['success' => 'success']);
+
+    }
 }
