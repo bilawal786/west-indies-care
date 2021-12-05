@@ -43,4 +43,8 @@ class ApiController extends Controller
         $orders = Order::where('website', $website)->where('status', $status)->where('paymentstatus', 1)->get();
         return response()->json($orders);
     }
+    public function orderDetails($id){
+        $order = Order::find($id);
+        return response()->json($order);
+    }
 }
