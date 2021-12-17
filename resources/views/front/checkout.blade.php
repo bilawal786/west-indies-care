@@ -309,23 +309,23 @@
                             @endforeach
                             </tbody>
                             <tfoot>
-                            @if(Session::get('before_discount_total'))
+                            @if($total)
                                 <tr class="cart-subtotal">
                                     <th>Total</th>
-                                    <td data-title="Subtotal"><span class="amount">{{Session::get('before_discount_total')}} €</span></td>
+                                    <td data-title="Subtotal"><span class="amount">{{$total}} €</span></td>
                                 </tr>
                             @endif
-                            @if(Session::get('coupon'))
+                            @if($content->discount)
                                 <tr class="cart-subtotal">
                                     <th>Remise</th>
-                                    <td data-title="Subtotal"><span class="amount">{{Session::get('coupon')}} %</span></td>
+                                    <td data-title="Subtotal"><span class="amount">{{$content->discount}} %</span></td>
                                 </tr>
                             @endif
                             <tr class="cart-subtotal">
                                 <th>Le montant final</th>
                                 <td>
-                                    <input type="hidden" name="total" value="{{$total}}">
-                                    <span class="woocommerce-Price-amount amount"><bdi>{{$total}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span>
+                                    <input type="hidden" name="total" value="{{$total - ($total * $content->discount / 100)}}">
+                                    <span class="woocommerce-Price-amount amount"><bdi>{{$total - ($total * $content->discount / 100)}}<span class="woocommerce-Price-currencySymbol">€</span></bdi></span>
                                 </td>
                             </tr>
                             </tfoot>

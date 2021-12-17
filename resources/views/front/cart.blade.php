@@ -35,7 +35,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                <tr>
+                          {{-- <tr>
                                     <td colspan="6" class="actions">
                                         <form action="" id="couponform">
                                             <h3 class="successalert" style="color: green;"></h3>
@@ -48,7 +48,7 @@
                                         </form>
                                         <a href="{{route('cart.reset')}}"> <button type="submit" class="button update" name="update_cart" value="Update cart">Réinitialiser le panier</button></a>
                                     </td>
-                                </tr>
+                                </tr>--}}
                                 </tbody>
                             </table>
                         <div class="row">
@@ -63,21 +63,21 @@
                                                 <th>Articles au total</th>
                                                 <td data-title="Subtotal"><span class="amount">{{$cartTotalQuantity}}</span></td>
                                             </tr>
-                                            @if(Session::get('before_discount_total'))
+                                            @if($total)
                                             <tr class="cart-subtotal">
                                                 <th>Total</th>
-                                                <td data-title="Subtotal"><span class="amount">{{Session::get('before_discount_total')}} €</span></td>
+                                                <td data-title="Subtotal"><span class="amount">{{$total}} €</span></td>
                                             </tr>
                                             @endif
-                                            @if(Session::get('coupon'))
+                                            @if($content)
                                             <tr class="cart-subtotal">
                                                 <th>Remise</th>
-                                                <td data-title="Subtotal"><span class="amount">{{Session::get('coupon')}} %</span></td>
+                                                <td data-title="Subtotal"><span class="amount">{{$content->discount}} %</span></td>
                                             </tr>
                                             @endif
                                             <tr class="cart-subtotal">
                                                 <th>Le montant final</th>
-                                                <td data-title="Subtotal"><span class="amount">{{$total}} €</span></td>
+                                                <td data-title="Subtotal"><span class="amount">{{$total - ($total * $content->discount / 100)}} €</span></td>
                                             </tr>
                                             </tbody>
                                         </table>

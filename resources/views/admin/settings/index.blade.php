@@ -60,6 +60,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <label for="email_address">Remise</label>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" name="discount" value="{{$gs->discount}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <label for="email_address">Texte de pied de page</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="footer_text" value="{{$gs->footer_text}}">

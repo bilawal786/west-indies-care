@@ -58,6 +58,7 @@ class FrontendController extends Controller
         return view('front.blog', compact('blog'));
     }
     public function checkout(){
+        $content = Website::find(1);
         $cartitems = \Cart::getContent();
         $cartTotalQuantity = \Cart::getTotalQuantity();
         $total = \Cart::getTotal();
@@ -70,7 +71,7 @@ class FrontendController extends Controller
             ]);
         }
         $intent = $payment_intent->client_secret;
-        return view('front.checkout', compact('cartitems', 'cartTotalQuantity', 'total', 'user', 'intent'));
+        return view('front.checkout', compact('cartitems', 'cartTotalQuantity', 'total', 'user', 'intent', 'content'));
     }
     public function addtocart(Request $request){
         $product = Product::where('id', $request->product_id)->first();
@@ -78,11 +79,12 @@ class FrontendController extends Controller
         return redirect()->route('cartitems');
     }
     public function cartitems(){
+        $content = Website::find(1);
         $cartitems = \Cart::getContent();
         $cartTotalQuantity = \Cart::getTotalQuantity();
         $total = \Cart::getTotal();
         $cartSubTotal = \Cart::getSubTotal();
-        return view('front.cart', compact('cartitems', 'cartTotalQuantity', 'total', 'cartSubTotal'));
+        return view('front.cart', compact('cartitems', 'cartTotalQuantity', 'total', 'cartSubTotal', 'content'));
     }
     public function removecart(Request $request){
         \Cart::remove($request->id);
